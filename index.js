@@ -7,6 +7,8 @@ let io = require('socket.io')(http);
 
 server.use(express.static(__dirname + '/public'));
 
+users = {}
+
 server.get('/', (req, res) => {
     // res.send('<h1>Hello</h1>');
     res.sendFile(__dirname + '/index.html');
@@ -15,12 +17,19 @@ server.get('/', (req, res) => {
 io.on('connection', (socket) => {
     console.log('A user conneced');
 
+    socket.on('setName', (name) => {
+        if (!(name in users)) {
+            users[socket.id] = name;
+        }
+    });
+
     socket.on('disconnect', () => {
         console.log('A user disconnected');
+        delete users[socket.id];
     });
 
     socket.on('message', (msg) => {
-        io.emit('message', msg); // sends it back to connected users
+        io.emit('message', {id: socket.id, name: users[socket.id], msg: msg}); // sends it back to connected users
         console.log('message: ' + msg); // log to console to view
     });
 });

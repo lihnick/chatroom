@@ -1,4 +1,12 @@
 
+.name {
+    max-width: 50vw;
+}
+
+.init {
+    margin-top: 30vh;
+}
+
 .chatbox {
     height: 75vh;
     overflow: scroll;

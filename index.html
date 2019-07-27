@@ -11,16 +11,22 @@
             <div class="column"></div>
             <div id="app" class="column is-four-fifths">
                 <br>
-                <h1 class="title is-1">Chat</h1>
-                <div class="control chatbox">
-                    <p v-model="messages" v-for="msg in messages" class="has-background-light">{{ msg }}</p>
+                <div v-bind:class="{init: hide}" class="control">
+                    <h1 class="title is-1" style="display: inline;">Chatting as </h1>
+                    <input v-if="hide" v-model="name" @keyup.enter="login()" class="input is-large name" type="text" placeholder="Name">
+                    <h1 v-if="!hide" class="title is-1" style="display: inline;">{{ name }}</h1>
                 </div>
-                <div class="field has-addons is-expanded">
-                    <div class="control is-expanded">
-                        <input v-model="text" @keyup.enter="submit()" class="input is-large" type="text" placeholder="Message">
+                <div v-if="!hide">
+                    <div class="control chatbox">
+                        <p v-model="messages" v-for="msg in messages" class="has-background-light">{{ msg }}</p>
                     </div>
-                    <div class="control">
-                        <button @click="submit()" class="button is-large is-info">Send</button>
+                    <div class="field has-addons is-expanded">
+                        <div class="control is-expanded">
+                            <input v-model="text" @keyup.enter="submit()" class="input is-large" type="text" placeholder="Message">
+                        </div>
+                        <div class="control">
+                            <button @click="submit()" class="button is-large is-info">Send</button>
+                        </div>
                     </div>
                 </div>
             </div>
