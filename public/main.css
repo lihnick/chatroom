@@ -1,0 +1,23 @@
+
+.chatbox {
+    height: 75vh;
+    overflow: scroll;
+    vertical-align: bottom;
+    display: table-cell;
+    padding-bottom: 10px;
+}
+
+.message {
+    width: 70vw;
+}
+
+p {
+    display: inline-block;
+    /* overflow-wrap: break-word;
+    word-wrap: break-word; */
+    hyphens: auto;
+    margin: 5px 5px;
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: 1px 1px rgb(227, 231, 236);
+}
