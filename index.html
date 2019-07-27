@@ -13,15 +13,16 @@
                 <br>
                 <h1 class="title is-1">Chat</h1>
                 <div id="chatbox" class="control chatbox">
-                    <p class="has-background-light">message</p>
-                    <p class="has-background-light">In case anyone, for any reason, is wondering what security around Area 51 is like: perimeter is patrolled by armed guards, surveillance cameras & motion detectors, the latter of which are placed on public land to notify guards of your approach from afar.</p>
+                    <p v-for="m in messages" class="has-background-light">{{ m }}</p>
+                    <!-- <p class="has-background-light">message</p> -->
+                    <!-- <p class="has-background-light">In case anyone, for any reason, is wondering what security around Area 51 is like: perimeter is patrolled by armed guards, surveillance cameras & motion detectors, the latter of which are placed on public land to notify guards of your approach from afar.</p> -->
                 </div>
                 <div class="field has-addons is-expanded">
                     <div class="control is-expanded">
-                        <input id="message" class="input is-large" type="text" placeholder="Message">
+                        <input v-model="text" @keyup.enter="submit()" class="input is-large" type="text" placeholder="Message">
                     </div>
                     <div class="control">
-                        <button v-on:click="submit" id="submit" class="button is-large is-info">Send</button>
+                        <button @click="submit()" class="button is-large is-info">Send</button>
                     </div>
                 </div>
             </div>
