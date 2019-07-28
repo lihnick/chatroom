@@ -21,6 +21,7 @@ io.on('connection', (socket) => {
         if (!(name in users)) {
             users[socket.id] = name;
         }
+        io.emit('update', {id: socket.id, name: name, status: "name"})
     });
 
     socket.on('disconnect', () => {

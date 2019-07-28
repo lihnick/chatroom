@@ -18,7 +18,16 @@
                 </div>
                 <div v-if="!hide">
                     <div class="control chatbox">
-                        <p v-model="messages" v-for="msg in messages" class="has-background-light">{{ msg }}</p>
+                        <div v-model="messages" v-for="msg in messages">
+                            <div v-model="self" v-if="msg.id == self">
+                                <p class="has-background-light messageBox">{{ msg.msg }}</p>
+                                <span class="tag is-large">{{ msg.name[0] }}</span>
+                            </div>
+                            <div v-else>
+                                <span class="tag is-large">{{ msg.name[0] }}</span>
+                                <p class="has-background-light messageBox">{{ msg.msg }}</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="field has-addons is-expanded">
                         <div class="control is-expanded">

@@ -1,4 +1,5 @@
 
+
 .name {
     max-width: 50vw;
 }
@@ -19,7 +20,7 @@
     width: 70vw;
 }
 
-p {
+.messageBox {
     display: inline-block;
     /* overflow-wrap: break-word;
     word-wrap: break-word; */
@@ -28,4 +29,5 @@ p {
     padding: 15px;
     border-radius: 25px;
     box-shadow: 1px 1px rgb(227, 231, 236);
+    max-width: 60vw;
 }
