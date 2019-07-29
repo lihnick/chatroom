@@ -7,7 +7,7 @@ let io = require('socket.io')(http);
 
 server.use(express.static(__dirname + '/public'));
 
-users = {}
+let users = {}
 
 server.get('/', (req, res) => {
     // res.send('<h1>Hello</h1>');
@@ -35,6 +35,6 @@ io.on('connection', (socket) => {
     });
 });
 
-http.listen(3000, () => {
-    console.log('listening on localhost:3000');
+http.listen(process.env.PORT || 3000, () => {
+    console.log('listening on localhost: ' + process.env.PORT || 3000);
 });

@@ -8,8 +8,8 @@
     <body>
 
         <div class="columns is-mobile">
-            <div class="column"></div>
-            <div id="app" class="column is-four-fifths">
+            <div class="column is-mobile"></div>
+            <div id="app" class="column is-mobile is-four-fifths">
                 <br>
                 <div v-bind:class="{init: hide}" class="control">
                     <h1 class="title is-1" style="display: inline;">Chatting as </h1>
@@ -19,11 +19,11 @@
                 <div v-if="!hide">
                     <div class="control chatbox">
                         <div v-model="messages" v-for="msg in messages">
-                            <div v-model="self" v-if="msg.id == self">
+                            <div v-model="self" v-if="msg.id == self" class="align-right">
                                 <p class="has-background-light messageBox">{{ msg.msg }}</p>
                                 <span class="tag is-large">{{ msg.name[0] }}</span>
                             </div>
-                            <div v-else>
+                            <div v-else class="align-left">
                                 <span class="tag is-large">{{ msg.name[0] }}</span>
                                 <p class="has-background-light messageBox">{{ msg.msg }}</p>
                             </div>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="column"></div>
+            <div class="column is-mobile"></div>
         </div>
 
         <!-- <script type="text/x-template" id="bubble">
