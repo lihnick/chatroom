@@ -27,7 +27,7 @@ let app = function() {
         // NOTE: methods must have function(){} values instead of the short-hand functions: () => {}
         methods: {
             login: function() {
-                socket.emit('setName', this.name);
+                socket.emit('connected', this.name);
                 this.hide = false;
                 this.self = socket.id;
             },
@@ -37,8 +37,16 @@ let app = function() {
             },
             addText: function(msg) {
                 // NOTE: v-model="messages" is not needed on html tag b/c of v-for but is added so it can be reference here as this.messages
-                msg['color'] = this.strToColor(msg.id);
+                if (v.messages[v.messages.length-1].id == msg.id)  {
+                    msg['color'] = null;
+                }
+                else {
+                    msg['color'] = this.strToColor(msg.id);
+                }
                 console.log(msg.color);
+                v.messages.push(msg);
+            },
+            addNote: function(msg) {
                 v.messages.push(msg);
             },
             strToColor: function(str) {
@@ -53,6 +61,16 @@ let app = function() {
         v.addText(msg);
     });
 
+    socket.on('update', (msg) => {
+        if (msg.status === 'connected') {
+            // A user connected
+            v.messages = msg.past;
+            v.addNote(msg);
+        } else if (msg.status === 'disconnected') {
+            // A user disconnected
+            v.addNote(msg);
+        }
+    });
 }
 
 app();

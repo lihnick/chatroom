@@ -19,12 +19,15 @@
                 <div v-if="!hide">
                     <div class="control chatbox">
                         <div v-model="messages" v-for="msg in messages">
-                            <div v-model="self" v-if="msg.id == self" class="align-right">
+                            <div v-if="msg.status == 'connected' || msg.status == 'disconnected'" class="align-left">
+                                <p class="is-large has-text-weight-bold">{{ msg.msg }}</p>
+                            </div>
+                            <div v-model="self" v-else-if="msg.id == self" class="align-right">
                                 <p class="is-large has-text-weight-bold" v-bind:style="(msg.color === null) ? 'display: none;' : 'color: ' + msg.color">{{ msg.name }}</p>
                                 <p class="has-background-light messageBubble align-left">{{ msg.msg }}</p>
                             </div>
                             <div v-else class="align-left">
-                                <p class="is-large has-text-weight-bold">{{ msg.name }}</p>
+                                <p class="is-large has-text-weight-bold" v-bind:style="(msg.color === null) ? 'display: none;' : 'color: ' + msg.color">{{ msg.name }}</p>
                                 <p class="has-background-light messageBubble align-left">{{ msg.msg }}</p>
                             </div>
                         </div>
