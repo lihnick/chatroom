@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log(`Users ${socket.id} disconnected ${Object.keys(users).length}`);
-        io.emit('update', {id: socket.id, name: users[socket.id], msg: `User ${(users[socket.id] === undefined) ? socket.id : users[socket.id]} has disconnected`, status: 'disconnected'});
+        io.emit('update', {id: socket.id, name: users[socket.id], msg: `User ${(users[socket.id] === undefined) ? "" : users[socket.id]} has disconnected`, status: 'disconnected'});
         delete users[socket.id];
         if (Object.keys(users).length == 0) {
             messages = [{id: 'SERVER', msg: 'messages', name: 'server'}, {id: 'SERVER', name: 'server', msg:'In case anyone, for any reason, is wondering what security around Area 51 is like: perimeter is patrolled by armed guards, surveillance cameras & motion detectors, the latter of which are placed on public land to notify guards of your approach from afar.'}];
