@@ -18,6 +18,7 @@ let app = function() {
     v = new Vue({
         el: '#app',
         data: {
+            count: 0,
             text: '',
             name: '',
             self: '',
@@ -72,6 +73,40 @@ let app = function() {
         } else if (msg.status === 'disconnected') {
             // A user disconnected
             v.addNote(msg);
+        }
+    });
+
+    let interval, focused = (function(){
+        let stateKey, eventKey;
+        let keys = {
+            hidden: "visibilitychange",
+            webkitHidden: "webkitvisibilitychange",
+            mozHidden: "mozvisibilitychange",
+            msHidden: "msvisibilitychange"
+        };
+        for (stateKey in keys) {
+            if (stateKey in document) {
+                eventKey = keys[stateKey];
+                break;
+            }
+        }
+        return function(c) {
+            if (c) document.addEventListener(eventKey, c);
+            return !document[stateKey];
+        }
+    })();
+
+    focused(function(){
+        if (focused()) {
+            v.count = v.messages.length;
+            clearInterval(interval);
+            document.title = "Chat";
+        } else {
+            interval = setInterval(() => {
+                if (v.count < v.messages.length) {
+                    document.title = `Chat - ${v.messages.length - v.count} New Message(s)`
+                }
+            }, 3000);
         }
     });
 }
