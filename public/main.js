@@ -100,11 +100,14 @@ let app = function() {
         if (focused()) {
             v.count = v.messages.length;
             clearInterval(interval);
-            document.title = "Chat";
+            document.title = 'Chat';
         } else {
             interval = setInterval(() => {
                 if (v.count < v.messages.length) {
-                    document.title = `Chat - ${v.messages.length - v.count} New Message(s)`
+                    if (document.title == 'Chat')
+                        document.title = `Chat - ${v.messages.length - v.count} New Message(s)`;
+                    else
+                        document.title = 'Chat';
                 }
             }, 3000);
         }
