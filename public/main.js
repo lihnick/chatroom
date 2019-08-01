@@ -37,7 +37,9 @@ let app = function() {
             },
             addText: function(msg) {
                 // NOTE: v-model="messages" is not needed on html tag b/c of v-for but is added so it can be reference here as this.messages
-                if (v.messages[v.messages.length-1].id == msg.id)  {
+                console.log(v.messages[v.messages.length-1].id);
+                console.log(msg.id);
+                if (v.messages[v.messages.length-1].id == msg.id && v.messages[v.messages.length-1].status != 'connected')  {
                     msg['color'] = null;
                 }
                 else {
@@ -64,6 +66,7 @@ let app = function() {
     socket.on('update', (msg) => {
         if (msg.status === 'connected') {
             // A user connected
+            console.log(msg);
             v.messages = msg.past;
             v.addNote(msg);
         } else if (msg.status === 'disconnected') {
